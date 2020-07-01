@@ -79,6 +79,4 @@ app.delete('/api/notes/:id', (request, response) => {
 
     response.status(204).end()
 })
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server running on port ${PORT}`)
-})
+app.listen(process.env.PORT || 5000)
