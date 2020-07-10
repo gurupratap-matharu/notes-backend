@@ -26,6 +26,10 @@ app.get('/api/notes/:id', (request, response) => {
         .then(note => {
             response.json(note)
         })
+        .catch(error => {
+            console.log(error)
+            response.status(404).end()
+        })
 })
 
 app.post('/api/notes', (request, response) => {
