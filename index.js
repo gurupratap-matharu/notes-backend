@@ -51,7 +51,7 @@ app.post("/api/notes", (request, response, next) => {
     .then((savedAndFormattedNote) => {
       response.json(savedAndFormattedNote);
     })
-    .catch((error) => next(erro));
+    .catch((error) => next(error));
 });
 
 app.delete("/api/notes/:id", (request, response, next) => {
