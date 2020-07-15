@@ -11,7 +11,7 @@ module.exports = {
     'rules': {
         'indent': [
             'error',
-            2
+            4
         ],
         'eqeqeq': 'error',
         'no-trailing-spaces': 'error',
