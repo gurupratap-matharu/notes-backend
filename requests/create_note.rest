@@ -1,9 +1,10 @@
 # veer
 POST http://localhost:3001/api/notes
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZlZXIiLCJpZCI6IjVmMTViYzhmNTZiMWJmMDdiNDRiZTMxZiIsImlhdCI6MTU5NTI3NDUwMH0.rAXpuHmcWKkKs_yWA_2UAGLVTFqs2vVzU6vm6-m9b14
 
 {
-    "content": "Rise and rise again until lambs become Lions",
+    "content": "One day everything will make sense",
     "important": true,
     "userId": "5f15bc8f56b1bf07b44be31f"
 }
@@ -14,7 +15,7 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "content": "Sasta aur tikaau",
+    "content": "Without pain there is no glory!",
     "important": true,
     "userId": "5f15c2f47dfd680a3d978ee2"
 }
