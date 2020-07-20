@@ -1,7 +1,22 @@
+# veer
 POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "content": "Neha take care of Rehmat",
-    "important": true
+    "content": "Rise and rise again until lambs become Lions",
+    "important": true,
+    "userId": "5f15bc8f56b1bf07b44be31f"
 }
+
+### 
+# princy
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "Sasta aur tikaau",
+    "important": true,
+    "userId": "5f15c2f47dfd680a3d978ee2"
+}
+
+
