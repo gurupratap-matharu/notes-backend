@@ -8,7 +8,7 @@ const requestLogger = (request, response, next) => {
     next()
 }
 
-const unknownEndpont = (request, response) => {
+const unknownEndpoint = (request, response) => {
     response.status(404).end().send({ error: 'unknown endpoint' })
 }
 
@@ -21,11 +21,17 @@ const errorHandler = (error, request, response, next) => {
     else if (error.name === 'ValidationError') {
         return response.status(400).json({ error: error.message })
     }
+
+    else if (error.name === 'JsonWebTokenError') {
+        return response.status(401).json({ error: 'invalid token' })
+    }
+    logger.error(error.message)
+
     next(error)
 }
 
 module.exports = {
     requestLogger,
-    unknownEndpont,
+    unknownEndpoint,
     errorHandler
 }
