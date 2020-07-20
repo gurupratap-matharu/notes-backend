@@ -4,6 +4,8 @@ const app = require('../app')
 const api = supertest(app)
 const Note = require('../models/note')
 const helper = require('./test_helper')
+const User = require('../models/user')
+const bcrypt = require('bcrypt')
 
 beforeEach(async () => {
     await Note.deleteMany({})
@@ -79,9 +81,29 @@ describe('viewing a specific note', () => {
 
 })
 
-describe('addition of a new note', () => {
+describe('POST:addition of a new note', () => {
+
+    beforeEach(async () => {
+        await User.deleteMany({})
+
+        const passwordHash = await bcrypt.hash('sekret', 10)
+        const user = new User({ username: 'root', passwordHash })
+        await user.save()
+
+
+    })
 
     test('succeeds with valid data', async () => {
+
+        const userObject = { username: 'root', password: 'sekret' }
+        const responseWithToken = await api
+            .post('/api/login')
+            .send(userObject)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+
+        const token = responseWithToken.body.token
+
         const notesAtStart = await helper.notesInDb()
         const newNote = {
             content: 'async/await is cool',
@@ -90,6 +112,7 @@ describe('addition of a new note', () => {
 
         await api
             .post('/api/notes')
+            .set('Authorization', 'Bearer ' + token)
             .send(newNote)
             .expect(200)
             .expect('Content-Type', /application\/json/)
@@ -106,6 +129,14 @@ describe('addition of a new note', () => {
     })
 
     test('fails with statuscode 400 is data invalid', async () => {
+        const userObject = { username: 'root', password: 'sekret' }
+        const responseWithToken = await api
+            .post('/api/login')
+            .send(userObject)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+
+        const token = responseWithToken.body.token
 
         const notesAtStart = await helper.notesInDb()
 
@@ -115,6 +146,7 @@ describe('addition of a new note', () => {
         }
         await api
             .post('/api/notes')
+            .set('Authorization', 'Bearer ' + token)
             .send(invalidNote)
             .expect(400)
 
