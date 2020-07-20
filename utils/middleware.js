@@ -8,7 +8,7 @@ const requestLogger = (request, response, next) => {
     next()
 }
 
-const unknownEndpont = (request, response) => {
+const unknownEndpoint = (request, response) => {
     response.status(404).end().send({ error: 'unknown endpoint' })
 }
 
@@ -26,6 +26,6 @@ const errorHandler = (error, request, response, next) => {
 
 module.exports = {
     requestLogger,
-    unknownEndpont,
+    unknownEndpoint,
     errorHandler
 }
